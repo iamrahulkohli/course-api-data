@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.course.service;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -17,35 +17,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.service.Topic;
-import com.example.demo.service.TopicService;
+import com.example.course.service.Course;
+import com.example.course.service.CourseService;
+import com.example.course.service.Topic;
+import com.example.course.service.TopicService;
 @EnableAutoConfiguration
 @RestController
-public class DemoController {
+public class CourseController {
 	@Autowired
-	private TopicService topicService;
+	private CourseService courseService;
 
-	@RequestMapping(value = "/topics", method = RequestMethod.GET)
-
-	public List<Topic> listProducts() {
-		return topicService.getAllTopics();
-
-	}
-
-	@RequestMapping("topics/{id}")
-	public Topic getTopic(@PathVariable String id,@URL String url) {
-		System.out.println("TEsting : "+url);
-		return topicService.getTopic(id);
+	@RequestMapping(value = "/topics/{id}/courses", method = RequestMethod.GET)
+	public List<Course> listCourses(@PathVariable String id) {
+		return courseService.getAllCourses(id);
 
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/topics")
-	public void addTopic(@RequestBody Topic topic) {
+	@RequestMapping("/topics/{id}/courses/{courseid}")
+	public Course getCourse(@PathVariable String id,@URL String url) {
 	
-		topicService.addTopic(topic);
+		return courseService.getCourse(id);
+
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, value = "/topics/{id}")
+	@RequestMapping(method = RequestMethod.POST, value = "/topics/{topicid}/courses")
+	public void addCourse(@RequestBody Course course) {
+	
+		courseService.addCourse(course);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, value = "/topics/{topicid}/courses/{id}")
 	public void updateTopic(@RequestBody Topic topic,@PathVariable String id) {
 	//	topicService.updateTopic(topic,id);
 	}
